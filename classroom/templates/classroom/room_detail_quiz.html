@@ -22,7 +22,7 @@
           <th>Quiz</th>
           <th>Subject</th>
           <th>Questions</th>
-          <th>Taken</th>
+          
           <th></th>
         </tr>
       </thead>
@@ -32,7 +32,7 @@
             <td class="align-middle"><a href="{% url 'quiz_change' quiz.pk %}">{{ quiz.topic }}</a></td>
             <td class="align-middle">{{ quiz.subject }}</td>
             <td class="align-middle">{{ quiz.questions.count }}</td>
-            <td class="align-middle">{{ quiz.taken_count }}</td>
+            
             <td class="text-right">
               <a href="{% url 'dashboard' quiz.pk %}" class="btn btn-primary">View results</a>
             </td>
@@ -51,6 +51,7 @@
 
 
 <div class="card">
+  <div class="table-responsive">
     <table class="table mb-0">
       <thead>
         <tr>
@@ -76,7 +77,7 @@
           </tr>
         {% endfor %}
       </tbody>
-    </table>
+    </table></div></div>
   {% endif %}
 
 

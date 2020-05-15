@@ -270,7 +270,7 @@ def take_quiz(request, pk):
     questions =Question.objects.filter(quiz__id=pk)
     answers = Answer.objects.filter(question__quiz__id=pk)
     student = request.user
-    if Dashboard.objects.filter(student_id=student).exists():
+    if Dashboard.objects.filter(student_id=student).exists() and Dashboard.objects.filter(quiz__id=pk).exists():
         messages.warning(request, 'You have already given quiz. You cannot give it again')
        
         return render(request,'classroom/already_taken.html')
@@ -421,7 +421,7 @@ def classmates(request,pk):
 class RoomDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
     model= Teachercreate
     template_name='classroom/item_confirm_delete.html'
-    success_url='/classroom_summary/'
+    success_url='/'
     def test_func(self):
         item=self.get_object()
         if self.request.user == item.teacher:
@@ -475,5 +475,5 @@ class AnnouncementCreateView(CreateView):
         form.instance.item_id = self.kwargs.get('pk')
         pk=self.kwargs.get('pk')
         form.save()
-        messages.warning(self.request, 'Assignment is created')
-        return redirect('detail', pk)    
+        messages.warning(self.request, 'Anouncement is created')
+        return redirect('detail_announcement', pk)    
